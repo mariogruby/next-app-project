@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProductType } from "@/types/product";
+import { Button } from "./ui/button";
+// import { useRouter } from "next/navigation";
 
 export const ProductCard = ({
   loading,
@@ -14,6 +16,8 @@ export const ProductCard = ({
   // translate: MotionValue<number>;
   loading?: boolean;
 }) => {
+
+  // const router = useRouter();
   if (loading || !result || result.length === 0) {
     return (
       <motion.div
@@ -36,12 +40,12 @@ export const ProductCard = ({
       return (
         <motion.div
           key={id}
-          // style={{ x: translate }}
           whileHover={{ y: -20 }}
           className="group/product h-[500px] w-[39vh] md:w-[330px] xl:w-[350px] flex-shrink-0"
         >
-          <Link href={`/product/${slug}`} className="rounded-[22px] block group-hover/product:shadow-2xl">
           <div className="rounded-[22px] shadow-xl max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900 border-2 border-zinc-100 dark:border-zinc-700">
+            <Link href={`/product/${slug}`} className="block">
+              {/* Contenido clickeable que lleva al producto */}
               {images.length > 0 ? (
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${images[0].url}`}
@@ -53,21 +57,29 @@ export const ProductCard = ({
               ) : (
                 <Skeleton className="h-[300px] w-[250px]" />
               )}
-              <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
+              <p className="text-base sm:text-xl text-neutral-900 mt-4 mb-2 dark:text-neutral-200">
                 {productName}
               </p>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 {product.description.slice(0, 100)}...
               </p>
-              <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-neutral-900 mt-4 text-xs font-bold dark:bg-zinc-800">
-                <span>Add to cart</span>
-                <span className="bg-zinc-700 rounded-full text-[0.8rem] px-2 py-1 text-white">
-                  ${price}
-                </span>
-              </button>
-            </div>
-          </Link>
+            </Link>
+
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log("add to cart");
+              }}
+              icon={<span>Add to cart</span>}
+              className="rounded-xl pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-neutral-900 mt-4 text-xs font-bold dark:bg-zinc-800"
+            >
+              <span className="bg-zinc-700 rounded-lg text-[0.8rem] px-2 py-1 text-white">
+                ${price}
+              </span>
+            </Button>
+          </div>
         </motion.div>
+
       );
     })
   );

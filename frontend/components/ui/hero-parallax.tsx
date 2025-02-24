@@ -56,7 +56,7 @@ export const HeroParallax = () => {
     className="mx-auto w-full py-4 sm:px-6 lg:px-8"
   >
     {[firstRow, secondRow].map((row, rowIndex) => (
-      <motion.div key={rowIndex} className="w-full">
+      <motion.div key={rowIndex}  className="w-full">
         <Carousel opts={{ align: "start"}} className="w-full max-w-7xl mx-auto overflow-visible">
           <CarouselContent className="py-5 sm:my-12 mx-5">
             {loading && row.length === 0
@@ -91,10 +91,10 @@ export const Header = () => {
   const words = ["cases", "accessories", "airpods", "wallets"];
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
+      <h1 className="text-2xl md:text-7xl font-bold text-neutral-900 dark:text-white">
         None Store <br /> <FlipWords words={words} /> <br />
       </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
+      <p className="max-w-2xl text-base md:text-xl mt-8 text-neutral-900 dark:text-neutral-200">
         We build beautiful products with the latest technologies and frameworks.
         We are a team of passionate developers and designers that love to build
         amazing products.

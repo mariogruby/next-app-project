@@ -50,6 +50,15 @@
     },
     "colors": {
       "type": "json"
+    },
+    "model": {
+      "type": "enumeration",
+      "enum": [
+        "normal",
+        "plus",
+        "pro",
+        "pro max"
+      ]
     }
   }
 }

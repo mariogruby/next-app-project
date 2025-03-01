@@ -6,17 +6,16 @@ import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProductType } from "@/types/product";
 import { Button } from "./ui/button";
+import { formatPrice } from "@/lib/formatPrice";
 // import { useRouter } from "next/navigation";
 
-export const ProductCard = ({
-  loading,
-  result,
-}: {
-  result?: ProductType[];
-  // translate: MotionValue<number>;
+type ProductCardProps = {
   loading?: boolean;
-}) => {
+  result?: ProductType[];
+}
+export const ProductCard = (props: ProductCardProps) => {
 
+  const { loading, result } = props;
   // const router = useRouter();
   if (loading || !result || result.length === 0) {
     return (
@@ -74,7 +73,7 @@ export const ProductCard = ({
               className="rounded-xl pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-neutral-900 mt-4 text-xs font-bold dark:bg-zinc-800"
             >
               <span className="bg-zinc-700 rounded-lg text-[0.8rem] px-2 py-1 text-white">
-                ${price}
+                {formatPrice(price)}
               </span>
             </Button>
           </div>

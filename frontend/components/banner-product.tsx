@@ -11,7 +11,9 @@ export default function BannerProduct() {
     const { result, loading, error }: ResponseType = useGetFeaturedProducts();
 
     const response = result || [];
-    const selectedProduct = response.find((product: ProductType) => product.id === 31);
+    const selectedProduct = response.find((product: ProductType) => product.id === 35);
+
+    console.log("response: ",response)
 
     const imageUrl = selectedProduct?.images?.[0]?.url
         ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProduct.images[0].url}`

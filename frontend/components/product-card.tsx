@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ProductType } from "@/types/product";
 import { Button } from "./ui/button";
 import { formatPrice } from "@/lib/formatPrice";
+import { useCart } from "@/hooks/use-cart";
 // import { useRouter } from "next/navigation";
 
 type ProductCardProps = {
@@ -16,6 +17,8 @@ type ProductCardProps = {
 export const ProductCard = (props: ProductCardProps) => {
 
   const { loading, result } = props;
+  const { addItem } = useCart()
+
   // const router = useRouter();
   if (loading || !result || result.length === 0) {
     return (
@@ -67,7 +70,7 @@ export const ProductCard = (props: ProductCardProps) => {
             <Button
               onClick={(e) => {
                 e.stopPropagation();
-                console.log("add to cart");
+                addItem(product);
               }}
               icon={<span>Add to cart</span>}
               className="rounded-xl pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-neutral-900 mt-4 text-xs font-bold dark:bg-zinc-800"

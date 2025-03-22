@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { formatPrice } from "@/lib/formatPrice";
 import { ProductType } from "@/types/product";
 import { Heart } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 
 export type InfoProductProps = {
     product: ProductType;
@@ -24,6 +25,7 @@ const colorMapping: Record<string, string> = {
 const InfoProduct = (props: InfoProductProps) => {
     const { product, onColorSelect } = props;
     const [isExpanded, setIsExpanded] = useState(false);
+    const {addItem} = useCart();
     
     const truncatedDescription = product.description.length > 100 
         ? product.description.substring(0, 200) + "..."
@@ -78,7 +80,7 @@ const InfoProduct = (props: InfoProductProps) => {
             <Separator className="my-4" />
             <p className="my-4 text-2xl">{formatPrice(product.price)}</p>
             <div className="flex items-center gap-5">
-                <Button className="h-[50px] w-full justify-center my-5" onClick={() => console.log("Add to cart")}>Add to cart</Button>
+                <Button className="h-[50px] w-full justify-center my-5" onClick={() => addItem(product)}>Add to cart</Button>
                 <Button className="h-[50px] w-full justify-center" onClick={() => console.log("Buy now")}>Buy now</Button>
                 <Heart width={60} strokeWidth={1} className="transition duration-300 cursor-pointer hover:fill-black"
                 onClick={() => console.log("add to loved products")} />

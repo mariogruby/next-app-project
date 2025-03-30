@@ -12,7 +12,7 @@ const CarouselProduct = (props: CarouselProductProps) => {
     const { images } = props;
 
     return (
-        <div className="sm:px-16">
+        <div className="sm:px-16 md:px-2 lg:px-16">
             <Carousel className="relative">
                 <CarouselContent>
                     {images.map((image) => (

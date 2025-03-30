@@ -42,4 +42,3 @@ const FilterModel = (props: FilterModelProps) => {
 };
 
 export default FilterModel;
-

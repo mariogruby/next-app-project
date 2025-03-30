@@ -11,7 +11,6 @@ export function useGetFeaturedProducts() {
             try {
                 const res = await fetch(url)
                 const json = await res.json()
-                console.log(json); // Verifica la respuesta de la API
                 setResult(json.data)
                 setLoading(false)
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

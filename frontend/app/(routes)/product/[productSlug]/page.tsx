@@ -17,7 +17,7 @@ export default function Page() {
     const router = useRouter()
     const { productSlug } = params
 
-    const { result, loading, error }: ResponseType = useGetProductBySlug(productSlug)
+    const { result, loading, error }: ResponseType = useGetProductBySlug(productSlug) // TODO: fix warning productSlug!!!
     const [selectedColor, setSelectedColor] = useState<string | null>(searchParams.get('color') || null)
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Page() {
         : result[0].images;
 
     return (
-        <div className="max-w-6xl py-4 mx-auto sm:py-32 sm:px-24">
+        <div className="max-w-full py-4 mx-auto sm:py-32 lg:px-24">
             <div className="grid sm:grid-cols-2">
                 <div>
                     <CarouselProduct images={filteredImages} />

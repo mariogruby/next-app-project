@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
 import Image from "next/image";
@@ -11,7 +12,8 @@ export default function BannerProduct() {
     const { result, loading, error }: ResponseType = useGetFeaturedProducts();
 
     const response = result || [];
-    const selectedProduct = response.find((product: ProductType) => product.id === 35);
+    // this a product visualized in the banner, hardcoded whit product.productName 
+    const selectedProduct = response.find((product: ProductType) => product.productName === "Case iphone 16");
 
     console.log("response: ",response)
 
@@ -26,7 +28,7 @@ export default function BannerProduct() {
                     <>
                         <h1 className="text-4xl font-semibold text-neutral-900 dark:text-white">
                             best selling product <br />
-                            <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                            <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none  text-neutral-900 ">
                                 {selectedProduct?.productName}
                             </span>
                         </h1>

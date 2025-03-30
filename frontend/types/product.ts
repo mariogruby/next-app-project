@@ -7,6 +7,7 @@ export type ProductType = {
     isFeatured: boolean;
     price: number;
     colors: string[];
+    selectedColor?: string;
     model: string;
     images: {
         id: number;

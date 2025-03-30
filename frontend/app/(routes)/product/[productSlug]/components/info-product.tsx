@@ -5,6 +5,7 @@ import { formatPrice } from "@/lib/formatPrice";
 import { ProductType } from "@/types/product";
 import { Heart } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
+import { useLovedProducts } from "@/hooks/use-loved-products";
 
 export type InfoProductProps = {
     product: ProductType;
@@ -25,27 +26,33 @@ const colorMapping: Record<string, string> = {
 const InfoProduct = (props: InfoProductProps) => {
     const { product, onColorSelect } = props;
     const [isExpanded, setIsExpanded] = useState(false);
-    const {addItem} = useCart();
-    
-    const truncatedDescription = product.description.length > 100 
-        ? product.description.substring(0, 200) + "..."
-        : product.description;
-    
+    const { addItem, removeItem, items } = useCart();
+    const { addLoveItem, lovedItems, removeLovedItem } = useLovedProducts();
+    const isLoved = lovedItems.some(item => item.id === product.id);
+    const inCart = items.some(item => item.id === product.id);
+    const [selectedColor, setSelectedColor] = useState<string | undefined>(undefined);
+
     const handleColorSelect = (color: string) => {
+        setSelectedColor(color);
         onColorSelect(color);
     };
-    
+
+    // product description truncate
+    const truncatedDescription = product.description.length > 100
+        ? product.description.substring(0, 200) + "..."
+        : product.description;
+
     return (
         <div className="px-6">
             <div className="justify-between mb-3 sm:flex">
-                <h1 className="text-2xl">{product.productName}</h1>
+                <h1 className="text-2xl text-neutral-900">{product.productName}</h1>
                 <div className="flex items-center justify-between gap-3" />
             </div>
             <Separator className="my-4" />
-            <p>
-                {isExpanded ? product.description : truncatedDescription} 
+            <p className="text-neutral-900">
+                {isExpanded ? product.description : truncatedDescription}
                 {product.description.length > 100 && (
-                    <span 
+                    <span
                         className="text-blue-500 cursor-pointer ml-2"
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
@@ -57,14 +64,15 @@ const InfoProduct = (props: InfoProductProps) => {
 
             {product.colors && product.colors.length > 0 && (
                 <div className="my-4">
-                    <p className="mb-2 font-semibold">Select color:</p>
+                    <p className="mb-2 font-semibold text-neutral-900">{selectedColor ? "Colors:" : "Select a color to add it to your cart or purchase it:"}</p>
                     <div className="flex gap-3">
                         {product.colors.map((color, index) => {
                             const displayColor = colorMapping[color.toLowerCase()] || color;
+                            const isSelected = selectedColor === color;
                             return (
                                 <button
                                     key={index}
-                                    className="w-10 h-10 rounded-full border-2 transition hover:scale-110 relative"
+                                    className={`w-10 h-10 rounded-full border-2 transition hover:scale-110 relative ${isSelected ? 'border-black' : 'border-gray-300'}`}
                                     style={{
                                         backgroundColor: displayColor,
                                         boxShadow: "inset 3px 3px 6px rgba(255, 255, 255, 0.3), inset -3px -3px 6px rgba(0, 0, 0, 0.2)"
@@ -80,10 +88,31 @@ const InfoProduct = (props: InfoProductProps) => {
             <Separator className="my-4" />
             <p className="my-4 text-2xl">{formatPrice(product.price)}</p>
             <div className="flex items-center gap-5">
-                <Button className="h-[50px] w-full justify-center my-5" onClick={() => addItem(product)}>Add to cart</Button>
-                <Button className="h-[50px] w-full justify-center" onClick={() => console.log("Buy now")}>Buy now</Button>
-                <Heart width={60} strokeWidth={1} className="transition duration-300 cursor-pointer hover:fill-black"
-                onClick={() => console.log("add to loved products")} />
+                <Button
+                    className="h-[50px] w-full justify-center my-5"
+                    onClick={() =>
+                        inCart
+                            ? removeItem(product.id)
+                            : addItem({ ...product, selectedColor }, selectedColor)
+                    }
+                    disabled={!selectedColor && !inCart}
+                >
+                    {inCart ? "Remove from cart" : "Add to cart"}
+                </Button>
+
+                <Button
+                    className="h-[50px] w-full justify-center"
+                    onClick={() => console.log("Buy now")}
+                    disabled={!selectedColor && !inCart}
+                >
+                    Buy now
+                </Button>
+                <Heart
+                    width={60}
+                    strokeWidth={1}
+                    className={`transition duration-300 cursor-pointer ${isLoved ? 'fill-neutral-900' : 'hover:fill-neutral-900'}`}
+                    onClick={() => isLoved ? removeLovedItem(product.id) : addLoveItem(product)}
+                />
             </div>
         </div>
     );

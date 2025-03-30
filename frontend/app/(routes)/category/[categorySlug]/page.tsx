@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react"
 import { useGetCategoryProduct } from "@/api/getCategoryProduct"
 import { Separator } from "@/components/ui/separator"
-// import { CategoryType } from "@/types/category"
 import { ResponseType } from "@/types/response"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import FiltersControlsCategory from "./components/filters-controls-category"
@@ -21,12 +20,12 @@ export default function Page() {
     const categorySlugString = categorySlug as string
     const { result, loading }: ResponseType = useGetCategoryProduct(categorySlugString)
 
-    // Leer el filtro desde la URL
+    // learn filter w url params
     const filterFromUrl = searchParams.get("model") || ""
     const [filterModel, setFilterModel] = useState(filterFromUrl)
 
     useEffect(() => {
-        // Cuando cambia el filtro, actualizar la URL sin recargar la página
+        // when filter change, update the url without scroll
         const newParams = new URLSearchParams(searchParams.toString())
         if (filterModel) {
             newParams.set("model", filterModel)
@@ -46,7 +45,7 @@ export default function Page() {
     return (
         <div className="max-w-full py-4 mx-auto sm:py-16 sm:px-24">
             {result != null && !loading && (
-                <h1 className="text-3xl font-medium">{result[0].category.categoryName}</h1>
+                <h1 className="text-3xl text-neutral-900 font-medium">{result[0].category.categoryName}</h1>
             )}
             <Separator />
 
@@ -57,7 +56,7 @@ export default function Page() {
                     {[filteredProducts].map((row, rowIndex) => (
                         <div key={rowIndex} className="w-full">
                             <Carousel opts={{ align: "start" }} className="w-full md:max-w-xl lg:max-w-3xl xl:max-w-6xl mx-auto overflow-visible">
-                                <CarouselContent className="py-5 sm:my-12 md:gap-10 xl:gap-0 mx-5">
+                                <CarouselContent className="pb-14 sm:my-12 md:gap-10 md:pb xl:gap-0 xl:pb mx-5">
                                     {loading && row.length === 0
                                         ? Array.from({ length: skeletonCount }).map((_, index) => (
                                             <CarouselItem
@@ -94,31 +93,3 @@ export default function Page() {
         </div>
     )
 }
-
-// {[filteredProducts].map((row, rowIndex) => (
-//     <div key={rowIndex} className="w-full">
-//         <Carousel opts={{ align: "start" }} className="w-full md:max-w-xl lg:max-w-3xl xl:max-w-6xl mx-auto overflow-visible">
-//             <CarouselContent className="py-5 sm:my-12 md:gap-10 xl:gap-0 mx-5">
-//                 {loading && row.length === 0
-//                     ? Array.from({ length: skeletonCount }).map((_, index) => (
-//                         <CarouselItem
-//                             key={`skeleton-${rowIndex}-${index}`}
-//                             className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
-//                         >
-//                             <ProductCard key={`skeleton-${rowIndex}-${index}`} loading={true} />
-//                         </CarouselItem>
-//                     ))
-//                     : row.map((product: ProductType) => (
-//                         <CarouselItem
-//                             key={product.id}
-//                             className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
-//                         >
-//                             <ProductCard key={product.id} result={[product]} loading={false} />
-//                         </CarouselItem>
-//                     ))}
-//             </CarouselContent>
-//             <CarouselPrevious className="hidden sm:flex" />
-//             <CarouselNext className="hidden sm:flex" />
-//         </Carousel>
-//     </div>
-// ))}

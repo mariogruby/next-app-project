@@ -5,14 +5,14 @@ import { toast } from 'sonner';
 
 interface CartStore {
     items: ProductType[],
-    addItem: (data: ProductType) => void
+    addItem: (data: ProductType, selectedColor?: string) => void
     removeItem: (id: number) => void
     removeAll: () => void
 }
 
 export const useCart = create(persist<CartStore>((set, get) => ({
     items: [],
-    addItem: (data: ProductType) => {
+    addItem: (data: ProductType, selectedColor?: string) => {
         const currentItems = get().items
         const existingItem = currentItems.find((item) => item.id == data.id)
 
@@ -21,7 +21,7 @@ export const useCart = create(persist<CartStore>((set, get) => ({
         }
 
         set({
-            items: [...get().items, data]
+            items: [...currentItems, { ...data, selectedColor }] 
         })
         toast.success("Product added to cart")
     },

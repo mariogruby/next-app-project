@@ -84,19 +84,19 @@ export default MenuList
 const components: { title: string; href: string; description: string }[] = [
     {
         title: "Cases",
-        href: "/categories/cases",
+        href: "/category/cases",
         description:
             "A modal dialog that interrupts the user with important content and expects a response.",
     },
     {
         title: "Airpods cases",
-        href: "/categories/airpods-cases",
+        href: "/category/airpods-cases",
         description:
             "For sighted users to preview content available behind a link.",
     },
     {
         title: "Wallets",
-        href: "/categories/wallets",
+        href: "/category/wallets",
         description:
             "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
     },

@@ -1,4 +1,5 @@
 "use client";
+
 import { useGetCategories } from "@/api/getProducts";
 import { ResponseType } from "../types/response";
 import { CategoryType } from "../types/category";

@@ -13,6 +13,7 @@ const FilterModel = (props: FilterModelProps) => {
     const { result, loading }: FiltersTypes = useGetProductField();
     const searchParams = useSearchParams();
     const selectedModel = searchParams.get("model") || "";
+    console.log("result:",result)
 
     return (
         <div className="my-5 w-[150px]">

@@ -1,16 +1,14 @@
 import { useCart } from "@/hooks/use-cart";
 import { ProductType } from "@/types/product";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { formatPrice } from '../../../../lib/formatPrice';
+import ProductImageMiniature from "@/components/shared/product-image-miniature";
 
 interface CartItemProps {
     product: ProductType;
 }
 
 const CartItem = ({ product }: CartItemProps) => {
-    const router = useRouter();
     const { removeItem } = useCart();
 
     // search corresponding image with the color selected (if existing color)
@@ -21,22 +19,15 @@ const CartItem = ({ product }: CartItemProps) => {
                 : false
         ) || product.images[0]; // if not coincidence, fallback to first image
 
+    console.log("color:", selectedImage)
+
     return (
         <li className="flex items-center py-4 border-b">
-
-            <div
-                className="w-16 h-16 overflow-hidden rounded-md cursor-pointer"
-                onClick={() => router.push(`/product/${product.slug}`)}
-            >
-                <Image
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedImage.url}` || "/placeholder.jpg"}
-                    alt={product.productName}
-                    width={64}
-                    height={64}
-                    className="object-cover"
-                />
-            </div>
-
+            <ProductImageMiniature
+                slug={product.slug}
+                selectedImage={selectedImage.url}
+                productName={product.productName}
+            />
             <div className="ml-4 flex-1">
                 <p className="text-lg font-medium">{product.productName}</p>
                 <p className="text-sm text-gray-500">{formatPrice(product.price)}</p>
@@ -53,3 +44,17 @@ const CartItem = ({ product }: CartItemProps) => {
 };
 
 export default CartItem;
+
+
+{/* <div
+    className="w-16 h-16 overflow-hidden rounded-md cursor-pointer"
+    onClick={() => router.push(`/product/${product.slug}`)}
+>
+    <Image
+        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedImage.url}` || "/placeholder.jpg"}
+        alt={product.productName}
+        width={64}
+        height={64}
+        className="object-cover"
+    />
+</div> */}

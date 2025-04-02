@@ -1,4 +1,5 @@
 "use client"
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/use-cart"
@@ -9,6 +10,8 @@ export default function Page() {
     const { items, removeAll } = useCart();
     const prices = items.map((product => product.price))
     const totalPrice = prices.reduce((total, price) => total + price, 0)
+
+    console.log("items:",items)
     return (
         <div className="max-w-6xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
             <h1 className="mb-5 text-3xl font-bold">Shopping cart</h1>

@@ -9,7 +9,8 @@ import { ResponseType } from "@/types/response";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 export const HeroParallax = () => {
-  const { result, loading }: ResponseType = useGetFeaturedProducts();
+  const { result, loading, error }: ResponseType = useGetFeaturedProducts();
+
 
   const products = result || [];
   const repeatedProducts = [...products, ...products, ...products].slice(0, 15);
@@ -45,45 +46,55 @@ export const HeroParallax = () => {
     springConfig
   );
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-500 text-xl">
+          Failed to load products
+        </p>
+      </div>
+    );
+  }
+
   return (
-<div
-  ref={ref}
-  className="min-h-screen py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
->
-  <Header />
-  <motion.div
-    style={{ rotateX, rotateZ, translateY, opacity }}
-    className="mx-auto w-full py-4 sm:px-6 lg:px-8 "
-  >
-    {[firstRow, secondRow].map((row, rowIndex) => (
-      <motion.div key={rowIndex}  className="w-full">
-        <Carousel opts={{ align: "start"}} className="w-full max-w-7xl mx-auto overflow-visible">
-          <CarouselContent className="pb-14 sm:my-12 md:pb-5 mx-5">
-            {loading && row.length === 0
-              ? Array.from({ length: skeletonCount }).map((_, index) => (
-                  <CarouselItem
-                    key={`skeleton-${rowIndex}-${index}`}
-                    className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
-                  >
-                    <ProductCard key={`skeleton-${rowIndex}-${index}`} loading={true} />
-                  </CarouselItem>
-                ))
-              : row.map((product: ProductType) => (
-                  <CarouselItem
-                    key={product.id}
-                    className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-4 xl:py-5"
-                  >
-                    <ProductCard key={product.id} result={[product]} loading={false} />
-                  </CarouselItem>
-                ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex" />
-          <CarouselNext className="hidden sm:flex" />
-        </Carousel>
+    <div
+      ref={ref}
+      className="min-h-screen py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+    >
+      <Header />
+      <motion.div
+        style={{ rotateX, rotateZ, translateY, opacity }}
+        className="mx-auto w-full py-4 sm:px-6 lg:px-8 "
+      >
+        {[firstRow, secondRow].map((row, rowIndex) => (
+          <motion.div key={rowIndex} className="w-full">
+            <Carousel opts={{ align: "start" }} className="w-full max-w-7xl mx-auto overflow-visible">
+              <CarouselContent className="pb-14 sm:my-12 md:pb-5 mx-5">
+                {loading && row.length === 0
+                  ? Array.from({ length: skeletonCount }).map((_, index) => (
+                    <CarouselItem
+                      key={`skeleton-${rowIndex}-${index}`}
+                      className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
+                    >
+                      <ProductCard key={`skeleton-${rowIndex}-${index}`} loading={true} />
+                    </CarouselItem>
+                  ))
+                  : row.map((product: ProductType) => (
+                    <CarouselItem
+                      key={product.id}
+                      className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-4 xl:py-5"
+                    >
+                      <ProductCard key={product.id} result={[product]} loading={false} />
+                    </CarouselItem>
+                  ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden sm:flex" />
+              <CarouselNext className="hidden sm:flex" />
+            </Carousel>
+          </motion.div>
+        ))}
       </motion.div>
-    ))}
-  </motion.div>
-</div>
+    </div>
   );
 };
 
@@ -93,12 +104,12 @@ export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
       <h1 className="text-2xl md:text-7xl font-bold text-neutral-900 dark:text-white">
-        None Store <br /> <FlipWords words={words} /> <br />
+        E-Store <br /> <FlipWords words={words} /> <br />
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 text-neutral-900 dark:text-neutral-200">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
+        We make high-quality accessories for the latest Apple devices,
+        with a team passionate about developing amazing products and giving
+        you the best design experience on your device.
       </p>
     </div>
   );

@@ -6,6 +6,7 @@ import SkeletonProduct from "./components/skeleton-product"
 import CarouselProduct from "./components/carousel-product"
 import InfoProduct from "./components/info-product"
 import { useState, useEffect } from "react"
+import { ResponseType } from "@/types/response"
 
 type ImageType = {
     name: string;
@@ -17,7 +18,7 @@ export default function Page() {
     const router = useRouter()
     const { productSlug } = params
 
-    const { result, loading, error }: ResponseType = useGetProductBySlug(productSlug) // TODO: fix warning productSlug!!!
+    const { result, loading, error }: ResponseType = useGetProductBySlug(productSlug as string)
     const [selectedColor, setSelectedColor] = useState<string | null>(searchParams.get('color') || null)
 
     useEffect(() => {
@@ -30,8 +31,16 @@ export default function Page() {
         router.push(`?${newParams.toString()}`, { scroll: false })
     }, [selectedColor, searchParams, router])
 
-    if (result == null) {
+    if (loading && !result) {
         return <SkeletonProduct />
+    }
+    
+    if (error && !result) {
+        return <p>Error found</p>
+    }
+    
+    if (!result || result.length === 0) { 
+        return <p>No product found</p>
     }
 
     const filteredImages = selectedColor

@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { ContainerScroll } from "./ui/container-scroll-animation";
 import Image from "next/image";
+import Link from "next/link";
+import { ContainerScroll } from "./ui/container-scroll-animation";
 import { ResponseType } from '../types/response';
 import { useGetFeaturedProducts } from "@/api/useGetFeaturedProducts";
 import { ProductType } from "@/types/product";
-import Link from "next/link";
 
 export default function BannerProduct() {
     const { result, loading, error }: ResponseType = useGetFeaturedProducts();
@@ -14,8 +14,6 @@ export default function BannerProduct() {
     const response = result || [];
     // this a product visualized in the banner, hardcoded whit product.productName 
     const selectedProduct = response.find((product: ProductType) => product.productName === "Case iphone 16");
-
-    console.log("response: ",response)
 
     const imageUrl = selectedProduct?.images?.[0]?.url
         ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProduct.images[0].url}`
@@ -27,7 +25,7 @@ export default function BannerProduct() {
                 titleComponent={
                     <>
                         <h1 className="text-4xl font-semibold text-neutral-900 dark:text-white">
-                            best selling product <br />
+                            Best selling product <br />
                             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none  text-neutral-900 ">
                                 {selectedProduct?.productName}
                             </span>
@@ -44,6 +42,13 @@ export default function BannerProduct() {
                     draggable={false}
                 />
             </ContainerScroll>
+            {loading && !result && (
+                <p>Loading product...</p>
+            )}
+
+            {error && !loading && (
+                <p>Error match</p>
+            )}
         </Link>
     );
 }

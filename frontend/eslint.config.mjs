@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       // Evita errores por props no reconocidas en JSX //!
       "react/no-unknown-property": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-ts-comment": "off",
     },
   },

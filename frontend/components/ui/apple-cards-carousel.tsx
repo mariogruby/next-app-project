@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { JSX } from 'react'; //!
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";

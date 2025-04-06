@@ -14,12 +14,6 @@ export const useCart = create(persist<CartStore>((set, get) => ({
     items: [],
     addItem: (data: ProductType, selectedColor?: string) => {
         const currentItems = get().items
-        const existingItem = currentItems.find((item) => item.id == data.id)
-
-        if (existingItem) {
-            return toast.error("The product already exists in the cart")
-        }
-
         set({
             items: [...currentItems, { ...data, selectedColor }] 
         })
@@ -29,8 +23,9 @@ export const useCart = create(persist<CartStore>((set, get) => ({
         set({ items: [...get().items.filter((item) => item.id != id)] })
         toast.warning("Product removed from cart")
     },
-    removeAll: () => set({ items: [] })
+    removeAll: () => set({ items: [] }) // this set is called only in /success after checkout successfully 
 }), {
     name: "cart-storage",
     storage: createJSONStorage(() => localStorage)
-}))
+}))  
+// all products are stored in local storage because this is a basic web app for demonstrate skills in next and ts, so, its more faster and in future versions the products saved in the cart will be saved in db 

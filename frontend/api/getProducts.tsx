@@ -13,7 +13,7 @@ export function useGetCategories() {
                 const json = await res.json()
                 setResult(json)
                 setLoading(false)
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 setError(error)
                 setLoading(false)

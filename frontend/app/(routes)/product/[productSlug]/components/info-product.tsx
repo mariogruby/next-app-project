@@ -27,8 +27,6 @@ const InfoProduct = (props: InfoProductProps) => {
         onColorSelect(color);
     };
 
-    console.log("selectedColor:", selectedColor)
-
     // product description truncate
     const truncatedDescription = product.description.length > 100
         ? product.description.substring(0, 200) + "..."

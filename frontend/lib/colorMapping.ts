@@ -1,3 +1,5 @@
+// this is a list of colors products transcript in color palette corresponding
+
 export const colorMapping: Record<string, string> = {
     grape: "#6D2E46",
     blue: "oklch(0.424 0.199 265.638)",

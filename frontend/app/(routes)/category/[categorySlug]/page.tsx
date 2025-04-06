@@ -18,7 +18,7 @@ export default function Page() {
 
     const { categorySlug } = params
     const categorySlugString = categorySlug as string
-    const { result, loading }: ResponseType = useGetCategoryProduct(categorySlugString)
+    const { result, loading, error }: ResponseType = useGetCategoryProduct(categorySlugString)
 
     // learn filter w url params
     const filterFromUrl = searchParams.get("model") || ""
@@ -85,9 +85,9 @@ export default function Page() {
                         <p>No products here</p>
                     )}
 
-                    {/* {error && !loading && (
+                    {error && !loading && (
                         <p>Error match</p>
-                    )} */}
+                    )}
                 </div>
             </div>
         </div>

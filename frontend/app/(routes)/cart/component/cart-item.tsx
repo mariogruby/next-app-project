@@ -19,8 +19,6 @@ const CartItem = ({ product }: CartItemProps) => {
                 : false
         ) || product.images[0]; // if not coincidence, fallback to first image
 
-    console.log("color:", selectedImage)
-
     return (
         <li className="flex items-center py-4 border-b">
             <ProductImageMiniature
@@ -44,17 +42,3 @@ const CartItem = ({ product }: CartItemProps) => {
 };
 
 export default CartItem;
-
-
-{/* <div
-    className="w-16 h-16 overflow-hidden rounded-md cursor-pointer"
-    onClick={() => router.push(`/product/${product.slug}`)}
->
-    <Image
-        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedImage.url}` || "/placeholder.jpg"}
-        alt={product.productName}
-        width={64}
-        height={64}
-        className="object-cover"
-    />
-</div> */}

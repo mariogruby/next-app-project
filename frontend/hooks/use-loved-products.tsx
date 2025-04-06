@@ -12,11 +12,6 @@ interface UseLovedProductsType {
 export const useLovedProducts = create(persist<UseLovedProductsType>((set, get) => ({
     lovedItems: [],
     addLoveItem: (data: ProductType) => {
-        const currentLovedItems = get().lovedItems;
-        const existingItem = currentLovedItems.find((item) => item.id === data.id)
-        if (existingItem) {
-            return toast.error("The product already exists in loved products")
-        }
         set({
             lovedItems: [...get().lovedItems, data]
         })

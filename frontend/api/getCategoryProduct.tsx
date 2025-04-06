@@ -5,7 +5,6 @@ export function useGetCategoryProduct(slug: string | string[]) {
     const [result, setResult] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
-    
 
     useEffect(() => {
         (async () => {
@@ -14,7 +13,7 @@ export function useGetCategoryProduct(slug: string | string[]) {
                 const json = await res.json()
                 setResult(json.data)
                 setLoading(false)
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 setError(error)
                 setLoading(false)
@@ -22,5 +21,5 @@ export function useGetCategoryProduct(slug: string | string[]) {
         })()
     }, [url])
 
-    return { result, loading, error}
+    return { result, loading, error }
 }

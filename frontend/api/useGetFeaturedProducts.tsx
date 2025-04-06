@@ -13,7 +13,7 @@ export function useGetFeaturedProducts() {
                 const json = await res.json()
                 setResult(json.data)
                 setLoading(false)
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 setError(error)
                 setLoading(false)
@@ -21,5 +21,5 @@ export function useGetFeaturedProducts() {
         })()
     }, [url])
 
-    return { result, loading, error}
+    return { result, loading, error }
 }

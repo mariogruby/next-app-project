@@ -30,24 +30,24 @@ const MenuList = () => {
                                         href="/"
                                     >
                                         <div className="mb-2 mt-4 text-lg font-medium">
-                                            Ecommerce Name
+                                            E-Store
                                         </div>
                                         <p className="text-sm leading-tight text-muted-foreground">
-                                            Beautifully designed components that you can copy and
-                                            paste into your apps. Accessible. Customizable. Open
-                                            Source.
+                                            We make high-quality accessories for the latest Apple devices,
+                                            with a team passionate about developing amazing products and giving
+                                            you the best design experience on your device.
                                         </p>
                                     </a>
                                 </NavigationMenuLink>
                             </li>
                             <ListItem href="/shop" title="Shop">
-                                Re-usable components built using Radix UI and Tailwind CSS.
+                                Explore our featured products
                             </ListItem>
-                            <ListItem href="/offers" title="Offers">
-                                How to install dependencies and structure your app.
+                            <ListItem href="/" title="Offers">
+                                Exclusive offers on a variety of products
                             </ListItem>
                             <ListItem href="/" title="Accesories">
-                                Styles for headings, paragraphs, lists...etc
+                                Accessories for your Iphone and Airpods
                             </ListItem>
                         </ul>
                     </NavigationMenuContent>
@@ -86,19 +86,19 @@ const components: { title: string; href: string; description: string }[] = [
         title: "Cases",
         href: "/category/cases",
         description:
-            "A modal dialog that interrupts the user with important content and expects a response.",
+            "Find durable, stylish, and personalized cases for your iPhone.",
     },
     {
         title: "Airpods cases",
-        href: "/category/airpods-cases",
+        href: "/category/cases-airpods",
         description:
-            "For sighted users to preview content available behind a link.",
+            "Find durable, stylish, and personalized cases for your Airpods.",
     },
     {
         title: "Wallets",
         href: "/category/wallets",
         description:
-            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+            "Cases with MagSafe integration and card slots, ideal for carrying your essentials without losing style.",
     },
 ]
 

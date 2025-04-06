@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client"
 
 import * as React from "react"
@@ -204,7 +205,7 @@ const CarouselPrevious = React.forwardRef<
     <Button
       ref={ref}
       variant={variant}
-      size={size}
+      size={size} 
       className={cn(
         "absolute  h-8 w-8 rounded-full",
         orientation === "horizontal"

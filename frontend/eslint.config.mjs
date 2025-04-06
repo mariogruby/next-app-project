@@ -11,6 +11,13 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // Evita errores por props no reconocidas en JSX //!
+      "react/no-unknown-property": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

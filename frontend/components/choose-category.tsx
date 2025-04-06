@@ -26,7 +26,6 @@ const ChooseCategory = () => {
 
     return (
 
-        //TODO: FALTA ARREGLAR MENSAJE DE ERROR
         <div className="w-full h-full py-20">
             <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-200 font-sans">
                 Choose your favorite category

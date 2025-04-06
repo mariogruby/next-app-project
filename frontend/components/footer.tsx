@@ -31,7 +31,7 @@ const Footer = () => {
                 <div className=" sm:flex sm:items-center sm:justify-between">
                     <p>
                         <span className="font-bold">
-                            None
+                            E-store
                         </span>
                         E-commerce
                     </p>
@@ -47,7 +47,7 @@ const Footer = () => {
 
                 <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
                     &copy; 2025
-                    <Link href="#">dev. </Link>all rights reserved
+                    <Link href="https://github.com/mariogruby">mariogruby. </Link>All rights reserved
                 </span>
             </div>
         </footer>

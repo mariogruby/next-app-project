@@ -1,4 +1,4 @@
-export default () => ({
+export default ({ env }) => ({
     'strapi-neon-tech-db-branches': {
         enabled: true,
         config: {
@@ -7,5 +7,20 @@ export default () => ({
           neonRole: "neondb_owner", // create it manually under roles for your project first
           gitBranch: "main" // branch can be pinned via this config option. Will not use branch from git then. Usefull for preview/production deployment
         }
+      },
+      upload: {
+        config: {
+          provider: 'cloudinary',
+          providerOptions: {
+            cloud_name: env('CLOUDINARY_NAME'),
+            api_key: env('CLOUDINARY_KEY'),
+            api_secret: env('CLOUDINARY_SECRET'),
+          },
+          actionOptions: {
+            upload: {},
+            uploadStream: {},
+            delete: {},
+          },
+        },
       },
 });

@@ -49,6 +49,9 @@ export default ({ env }) => {
       useNullAsDefault: true,
     },
   };
+  console.log('👉 Connecting to DB with client:', client);
+console.log('👉 DATABASE_URL:', env('DATABASE_URL'));
+
 
   return {
     connection: {

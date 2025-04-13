@@ -16,7 +16,7 @@ export default function BannerProduct() {
     const selectedProduct = response.find((product: ProductType) => product.productName === "Case iphone 16");
 
     const imageUrl = selectedProduct?.images?.[0]?.url
-        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProduct.images[0].url}`
+        ? `${selectedProduct.images[0].url}`
         : "/placeholder-image.jpg";
 
     return (

@@ -17,7 +17,7 @@ const ChooseCategory = () => {
                 key={id}
                 card={{
                     title: categoryName,
-                    src: `${process.env.NEXT_PUBLIC_BACKEND_URL}${mainImage.url}`,
+                    src: `${mainImage.url}`,
                 }}
             />
         );

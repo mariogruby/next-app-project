@@ -16,7 +16,7 @@ const ProductImageMiniature = (props: ProductImageMinProps) => {
             onClick={() => router.push(`/product/${slug}`)}
         >
             <Image
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedImage}` || "/placeholder.jpg"}
+                src={`${selectedImage}` || "/placeholder.jpg"}
                 alt={productName}
                 width={64}
                 height={64}

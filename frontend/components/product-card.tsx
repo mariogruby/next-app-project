@@ -53,7 +53,7 @@ export const ProductCard = (props: ProductCardProps) => {
             <Link href={`/product/${slug}`} className="block">
               {images.length > 0 ? (
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${images[0].url}`}
+                  src={`${images[0].url}`}
                   alt={productName}
                   height={400}
                   width={400}

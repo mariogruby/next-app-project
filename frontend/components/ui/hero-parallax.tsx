@@ -56,46 +56,50 @@ export const HeroParallax = () => {
     );
   }
 
-  return (
-    <div
-      ref={ref}
-      className="min-h-screen py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+return (
+  <div
+    ref={ref}
+    className="min-h-screen py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+  >
+    <Header />
+    <motion.div
+      style={{ rotateX, rotateZ, translateY, opacity }}
+      className="mx-auto w-full py-4 sm:px-6 lg:px-8 "
     >
-      <Header />
-      <motion.div
-        style={{ rotateX, rotateZ, translateY, opacity }}
-        className="mx-auto w-full py-4 sm:px-6 lg:px-8 "
-      >
-        {[firstRow, secondRow].map((row, rowIndex) => (
-          <motion.div key={rowIndex} className="w-full">
-            <Carousel opts={{ align: "start" }} className="w-full max-w-7xl mx-auto overflow-visible">
-              <CarouselContent className="pb-14 sm:my-12 md:pb-5 mx-5">
-                {loading && row.length === 0
-                  ? Array.from({ length: skeletonCount }).map((_, index) => (
-                    <CarouselItem
-                      key={`skeleton-${rowIndex}-${index}`}
-                      className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
-                    >
-                      <ProductCard key={`skeleton-${rowIndex}-${index}`} loading={true} />
-                    </CarouselItem>
-                  ))
-                  : row.map((product: ProductType) => (
-                    <CarouselItem
-                      key={product.id}
-                      className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-4 xl:py-5"
-                    >
-                      <ProductCard key={product.id} result={[product]} loading={false} />
-                    </CarouselItem>
-                  ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden sm:flex" />
-              <CarouselNext className="hidden sm:flex" />
-            </Carousel>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  );
+      {[firstRow, secondRow].map((row, rowIndex) => (
+        <motion.div key={rowIndex} className="w-full relative"> {/* relative */}
+          <Carousel opts={{ align: "start" }} className="w-full max-w-7xl mx-auto overflow-visible">
+            <CarouselContent className="pb-14 sm:my-12 md:pb-5 mx-5">
+              {loading && row.length === 0
+                ? Array.from({ length: skeletonCount }).map((_, index) => (
+                  <CarouselItem
+                    key={`skeleton-${rowIndex}-${index}`}
+                    className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-2"
+                  >
+                    <ProductCard key={`skeleton-${rowIndex}-${index}`} loading={true} />
+                  </CarouselItem>
+                ))
+                : row.map((product: ProductType) => (
+                  <CarouselItem
+                    key={product.id}
+                    className="py-8 xl:p-0 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3 md:mx-4 xl:mx-4 xl:py-5"
+                  >
+                    <ProductCard key={product.id} result={[product]} loading={false} />
+                  </CarouselItem>
+                ))}
+            </CarouselContent>
+            <div className="sm:hidden flex justify-center absolute bottom-0 left-0 right-0">
+              <CarouselPrevious className="relative left-auto right-auto transform-none mx-2" />
+              <CarouselNext className="relative left-auto right-auto transform-none mx-2" />
+            </div>
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
+          </Carousel>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+);
 };
 
 // this is a title presentation concept of landing page 

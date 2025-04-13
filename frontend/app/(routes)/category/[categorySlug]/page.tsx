@@ -54,7 +54,7 @@ export default function Page() {
 
                 <div className="flex">
                     {[filteredProducts].map((row, rowIndex) => (
-                        <div key={rowIndex} className="w-full">
+                        <div key={rowIndex} className="w-full relative">
                             <Carousel opts={{ align: "start" }} className="w-full md:max-w-xl lg:max-w-3xl xl:max-w-6xl mx-auto overflow-visible">
                                 <CarouselContent className="pb-14 sm:my-12 md:gap-10 md:pb xl:gap-0 xl:pb mx-5">
                                     {loading && row.length === 0
@@ -75,6 +75,10 @@ export default function Page() {
                                             </CarouselItem>
                                         ))}
                                 </CarouselContent>
+                                <div className="sm:hidden flex justify-center absolute bottom-0 left-0 right-0">
+                                    <CarouselPrevious className="relative left-auto right-auto transform-none mx-2" />
+                                    <CarouselNext className="relative left-auto right-auto transform-none mx-2" />
+                                </div>
                                 <CarouselPrevious className="hidden sm:flex" />
                                 <CarouselNext className="hidden sm:flex" />
                             </Carousel>

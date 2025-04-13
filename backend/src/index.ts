@@ -1,20 +1,26 @@
-// import type { Core } from '@strapi/strapi';
+import fetch from 'node-fetch';
+
+const PING_INTERVAL = 5 * 60 * 1000;
+const URL = process.env.SERVER_URL || 'https://next-app-project-70d6.onrender.com';
+
+const keepAlive = () => {
+  fetch(URL)
+    .then((res) => {
+      if (res.ok) {
+        console.log(`Ping successfully: ${res.status}`);
+      } else {
+        console.log(`Ping failed with status: ${res.status}`);
+      }
+    })
+    .catch((err) => console.error("Error in ping:", err));
+};
 
 export default {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
   register(/* { strapi }: { strapi: Core.Strapi } */) {},
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {
+    console.log("Initializing Keep-alive for Render...");
+    keepAlive(); // llamada inicial
+    setInterval(keepAlive, PING_INTERVAL);
+  },
 };

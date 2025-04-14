@@ -7,6 +7,7 @@ import { Heart } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { useLovedProducts } from "@/hooks/use-loved-products";
 import { colorMapping } from "@/lib/colorMapping";
+import { useRouter } from "next/navigation";
 
 export type InfoProductProps = {
     product: ProductType;
@@ -21,6 +22,7 @@ const InfoProduct = (props: InfoProductProps) => {
     const isLoved = lovedItems.some(item => item.id === product.id);
     const inCart = items.some(item => item.id === product.id);
     const [selectedColor, setSelectedColor] = useState<string | undefined>(undefined);
+    const router = useRouter()
 
     const handleColorSelect = (color: string) => {
         setSelectedColor(color);
@@ -92,7 +94,7 @@ const InfoProduct = (props: InfoProductProps) => {
 
                 <Button
                     className="h-[50px] w-full justify-center"
-                    onClick={() => console.log("Buy now")}
+                    onClick={() => router.push("/cart")}
                     disabled={!selectedColor && !inCart}
                 >
                     Buy now

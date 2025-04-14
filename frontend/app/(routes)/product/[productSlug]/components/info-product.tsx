@@ -94,11 +94,14 @@ const InfoProduct = (props: InfoProductProps) => {
 
                 <Button
                     className="h-[50px] w-full justify-center"
-                    onClick={() => router.push("/cart")}
+                    onClick={() => {
+                        if (!inCart) {
+                            addItem({ ...product, selectedColor }, selectedColor);
+                        }
+                        router.push("/cart");
+                    }}
                     disabled={!selectedColor && !inCart}
-                >
-                    Buy now
-                </Button>
+                />
                 <Heart
                     width={60}
                     strokeWidth={1}

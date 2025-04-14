@@ -101,7 +101,9 @@ const InfoProduct = (props: InfoProductProps) => {
                         router.push("/cart");
                     }}
                     disabled={!selectedColor && !inCart}
-                />
+                >
+                    Buy now
+                </Button>
                 <Heart
                     width={60}
                     strokeWidth={1}

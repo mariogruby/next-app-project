@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const PING_INTERVAL = 5 * 60 * 1000;
+const PING_INTERVAL = 10 * 60 * 1000;
 const URL = process.env.SERVER_URL || 'https://next-app-project-70d6.onrender.com';
 
 const keepAlive = () => {
@@ -20,7 +20,7 @@ export default {
 
   bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {
     console.log("Initializing Keep-alive for Render...");
-    keepAlive(); // llamada inicial
+    keepAlive();
     setInterval(keepAlive, PING_INTERVAL);
   },
 };

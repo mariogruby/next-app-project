@@ -4,10 +4,10 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
-    "build": "npm install --legacy-peer-deps && npx strapi build",
-    "deploy": "strapi deploy",
-    "develop": "strapi develop",
-    "start": "strapi start",
+    "build": "yarn install --mode=update-lockfile && yarn strapi build",
+    "deploy": "yarn strapi deploy",
+    "develop": "yarn strapi develop",
+    "start": "yarn strapi start",
     "strapi": "strapi"
   },
   "dependencies": {
@@ -16,7 +16,7 @@
     "@strapi/provider-upload-cloudinary": "^5.12.4",
     "@strapi/strapi": "5.9.0",
     "better-sqlite3": "11.3.0",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "2",
     "pg": "^8.14.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

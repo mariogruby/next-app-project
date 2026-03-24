@@ -1,25 +1,31 @@
 import fetch from 'node-fetch';
 
-const PING_INTERVAL = 10 * 60 * 1000;
+const PING_INTERVAL = 10 * 60 * 1000; // 10 minutos
 const URL = process.env.SERVER_URL || 'https://next-app-project-70d6.onrender.com';
 
-// Variable global para no crear múltiples intervals
-let keepAliveInterval: NodeJS.Timer | null = null;
+let keepAliveInterval: NodeJS.Timeout | null = null;
 
 const keepAlive = async () => {
   try {
-    const res = await fetch(URL);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000); // timeout de 10s
 
-    // Consumir el body para que no quede en memoria
-    await res.text();
+    const res = await fetch(URL, { 
+      signal: controller.signal,
+      // Evita keep-alive del agente si no lo necesitas
+      // agent: false 
+    });
 
-    if (res.ok) {
-      console.log(`Ping successfully: ${res.status}`);
+    await res.text(); // importante: consumir el body
+    clearTimeout(timeout);
+
+    console.log(`Ping OK: ${res.status}`);
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      console.error("Ping timeout");
     } else {
-      console.log(`Ping failed with status: ${res.status}`);
+      console.error("Error in ping:", err.message);
     }
-  } catch (err) {
-    console.error("Error in ping:", err);
   }
 };
 
@@ -29,9 +35,8 @@ export default {
   bootstrap() {
     console.log("Initializing Keep-alive for Render...");
 
-    // Evitar crear múltiples intervals
     if (!keepAliveInterval) {
-      keepAlive();
+      keepAlive(); // primer ping inmediato
       keepAliveInterval = setInterval(keepAlive, PING_INTERVAL);
     }
   },

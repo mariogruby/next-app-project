@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const PING_INTERVAL = 13 * 60 * 1000; // 13 minutos
+const PING_INTERVAL = 10 * 60 * 1000; // 10 minutos
 const URL = process.env.SERVER_URL || 'https://next-app-project-70d6.onrender.com';
 
 let keepAliveInterval: NodeJS.Timeout | null = null;

@@ -7,7 +7,7 @@
     "build": "yarn install --mode=update-lockfile && yarn strapi build",
     "deploy": "yarn strapi deploy",
     "develop": "yarn strapi develop",
-    "start": "yarn strapi start",
+    "start": "node --max-old-space-size=400 node_modules/.bin/strapi start",
     "strapi": "strapi"
   },
   "dependencies": {
